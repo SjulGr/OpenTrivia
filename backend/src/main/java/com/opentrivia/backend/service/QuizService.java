@@ -64,7 +64,7 @@ public class QuizService {
         StoredQuiz quiz = quizzes.get(request.id());
 
         if (quiz == null) {
-            throw new QuizNotFoundException("Quiz not found");
+            throw new QuizNotFoundException("No quiz with matching ID could be found");
         }
 
         Map<UUID, StoredQuestion> questions = quiz.questions()
