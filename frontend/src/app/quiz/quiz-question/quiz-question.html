@@ -1,0 +1,46 @@
+<div class="flex h-full flex-col">
+  <div class="flex-1">
+    @if (currentQuestion().type === 'boolean') {
+      <question-boolean
+        [question]="currentQuestion()"
+        [selectedAnswer]="currentAnswer() ?? null"
+        (answerSelected)="selectAnswer($event)"
+      />
+    }
+
+    @if (currentQuestion().type === 'multiple') {
+      <question-multiple
+        [question]="currentQuestion()"
+        [selectedAnswer]="currentAnswer() ?? null"
+        (answerSelected)="selectAnswer($event)"
+      />
+    }
+
+  </div>
+  <div class="grid grid-cols-3 items-center">
+    <div class="flex justify-baseline">
+      @if (!isFirstQuestion()) {
+        <button type="button" class="text-gray-500 font-bold min-w-1/2 hover:cursor-pointer hover:text-mist-900 transition" (click)="previous()">
+          Previous
+        </button>
+      }
+    </div>
+    <div class="flex justify-center text-mist-900">
+      {{ currentQuestionIndex() + 1 }} / {{ quiz()!.questions.length }}
+    </div>
+    <div class="flex justify-end">
+      @if (isLastQuestion()) {
+        <button type="button" class="text-gray-500 font-bold min-w-1/2 hover:text-mist-900 transition" (click)="finish()"
+          [class.hover:cursor-not-allowed]="!answeredAllQuestions()"
+          [class.hover:cursor-pointer]="answeredAllQuestions()"
+        >
+          Finish
+        </button>
+      } @else {
+        <button type="button" class="text-gray-500 font-bold min-w-1/2 hover:cursor-pointer hover:text-mist-900 transition" (click)="next()">
+          Next
+        </button>
+      }
+    </div>
+  </div>
+</div>

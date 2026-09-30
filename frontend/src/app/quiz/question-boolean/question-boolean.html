@@ -1,0 +1,23 @@
+<div class="flex grow h-full justify-center items-center">
+  <div class="grid grid-cols-2 gap-10 w-3/4 h-1/2 p-10">
+    <button
+      type="button"
+      (click)="selectAnswer('True')"
+      [class.bg-gray-300]="selectedAnswer()?.answer === 'True'"
+      [class.bg-white]="selectedAnswer()?.answer != 'True'"
+      class="shadow transition hover:cursor-pointer"
+    >
+      True
+    </button>
+
+    <button
+      type="button"
+      (click)="selectAnswer('False')"
+      [class.bg-gray-300]="selectedAnswer()?.answer === 'False'"
+      [class.bg-white]="selectedAnswer()?.answer != 'False'"
+      class="shadow transition hover:cursor-pointer"
+    >
+      False
+    </button>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+<main class="main h-screen w-screen flex items-center justify-center bg-linear-to-r from-emerald-800 via-teal-900 to-cyan-950">
+  <card [cardTitle]="cardTitle" class="w-1/2 h-1/2 flex">
+
+    @if (quiz()) {
+      @if (quizResult()) {
+        <quiz-result
+          (title)="onTitleChanged($event)"
+        />
+      } @else {
+        <quiz-question
+          (title)="onTitleChanged($event)"
+        />
+      }
+    } @else {
+      <quiz-create
+        (title)="onTitleChanged($event)"
+      />
+    }
+
+  </card>
+</main>
+
+<router-outlet />
