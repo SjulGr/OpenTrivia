@@ -1,6 +1,7 @@
 package com.opentrivia.backend.client;
 
 import com.opentrivia.backend.controller.dto.opentdb.OpenTdbResponse;
+import com.opentrivia.backend.exception.OpenTdbException;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 
@@ -23,10 +24,14 @@ public class OpenTdbClient {
         if (!difficulty.isEmpty()) uri += "&difficulty=" + difficulty;
         if (!type.isEmpty()) uri += "&type=" + type;
 
-        return restClient.get()
-                .uri(uri)
-                .retrieve()
-                .body(OpenTdbResponse.class);
+        try {
+            return restClient.get()
+                    .uri(uri)
+                    .retrieve()
+                    .body(OpenTdbResponse.class);
+        } catch (Exception exception) {
+            throw new OpenTdbException("Failed to retrieve questions from OpenTDB", exception);
+        }
     }
 
 }
