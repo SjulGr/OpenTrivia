@@ -1,0 +1,23 @@
+<div class="h-full w-full flex justify-center">
+  <form [formRoot]="quizForm" class="flex flex-col h-full w-1/2 items-center pt-5">
+    <div class="flex-1">
+      <label for="amount" class="font-bold text-mist-900 w-full">
+        Amount of question:
+      </label>
+      <input type="number" [formField]="quizForm.amount" class="w-full border-b-2">
+      @if (quizForm.amount().invalid() && quizForm.amount().touched()) {
+        <div class="text-red-700 text-sm">
+          @for (error of quizForm.amount().errors(); track error.kind) {
+            <span>{{ error.message }}</span>
+          }
+        </div>
+      }
+    </div>
+
+    <div class="flex justify-center">
+      <button type="submit" class="text-gray-500 font-bold hover:cursor-pointer hover:text-mist-900 transition">
+        Start Quiz
+      </button>
+    </div>
+  </form>
+</div>

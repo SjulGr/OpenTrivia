@@ -1,0 +1,46 @@
+<div class="flex flex-col gap-6 h-full items-center self-center">
+  <h2>
+    <span class="font-bold text-mist-900">
+      {{ correctAnswers() }} / {{ result()!.results.length }}
+    </span>
+  </h2>
+
+  <div class="min-h-0 flex-1 w-full overflow-y-auto">
+    <div class="grid grid-flow-row auto-rows-max gap-4">
+      @for (questionResult of result()!.results; track questionResult.id) {
+        @let question = getQuestionById(questionResult.id);
+
+        @if (question != null) {
+          <div class="flex bg-white shadow p-4">
+            <div class="grow">
+              <p class="col-span-2" [innerHTML]="question.question"></p>
+
+              <p class="col-span-2">
+                <span class="text-mist-700">
+                  Your answer:
+                </span>
+                <span class="text-mist-900 font-bold" [innerHTML]="questionResult.selected_answer"></span>
+              </p>
+            </div>
+
+            <div class="flex items-center min-w-20 justify-center">
+              @if (questionResult.is_correct) {
+                <p class="font-bold text-green-700 row-span-2 text-center">
+                  Correct
+                </p>
+              } @else {
+                <p class="font-bold text-red-700 row-span-2 text-center">
+                  Incorrect
+                </p>
+              }
+            </div>
+
+          </div>
+        }
+      }
+    </div>
+  </div>
+  <button type="button" class="text-gray-500 font-bold hover:cursor-pointer hover:text-mist-900 transition" (click)="quizService.newQuiz()">
+    New quiz
+  </button>
+</div>
