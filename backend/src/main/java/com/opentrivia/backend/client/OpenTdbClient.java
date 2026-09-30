@@ -18,17 +18,20 @@ public class OpenTdbClient {
             String difficulty,
             String type
     ) {
-        String uri = "/api.php";
-        uri += "?amount=" + amount;
-        if (!category.isEmpty()) uri += "&category=" + category;
-        if (!difficulty.isEmpty()) uri += "&difficulty=" + difficulty;
-        if (!type.isEmpty()) uri += "&type=" + type;
-
         try {
             return restClient.get()
-                    .uri(uri)
-                    .retrieve()
-                    .body(OpenTdbResponse.class);
+                .uri(builder -> {
+                    builder.path("/api.php")
+                            .queryParam("amount", amount);
+
+                    if (!category.isEmpty()) builder.queryParam("category", category);
+                    if (!difficulty.isEmpty()) builder.queryParam("difficulty", difficulty);
+                    if (!type.isEmpty()) builder.queryParam("type", type);
+
+                    return builder.build();
+                })
+                .retrieve()
+                .body(OpenTdbResponse.class);
         } catch (Exception exception) {
             throw new OpenTdbException("Failed to retrieve questions from OpenTDB", exception);
         }
