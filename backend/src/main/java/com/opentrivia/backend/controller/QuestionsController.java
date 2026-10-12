@@ -7,6 +7,7 @@ import com.opentrivia.backend.service.QuizService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 public class QuestionsController {
 
     private final QuizService quizService;
