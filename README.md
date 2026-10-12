@@ -16,12 +16,11 @@ and a Spring Boot backend.
 
 ## Running the Application
 
-Both the backend and frontend must be started separately.
+The backend and frontend must be started separately.
 
-### 1. Start the Backend
+Both applications can be run directly from IntelliJ IDEA using the Run button, or by following their respective setup guides:
 
-Follow the instructions in [`backend/README.md`](backend/README.md).
+- [Backend setup](backend/README.md)
+- [Frontend setup](frontend/README.md)
 
-### 2. Start the Frontend
-
-Follow the instructions in [`frontend/README.md`](frontend/README.md).
+The backend also includes tests, which can be run from IntelliJ IDEA.
